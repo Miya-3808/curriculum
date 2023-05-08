@@ -1,0 +1,47 @@
+問１
+ルートブリッジはSwitch3
+
+問２
+各ポートの役割
+・Switch1
+　F0/1：BP
+　F0/2：RP
+
+・Switch2
+　F0/1：DP
+　F0/2：RP
+
+・Switch3
+　E0/1：DP
+　E0/2：DP
+
+・Switch4
+　E0/1：DP
+　E0/2：RP
+
+理由
+まず、各スイッチ間の通信速度を考える。１と２の間は100Mbpsで19、１と３の間と２と４の間は10Mbpsで100、３と４の間は1Gbpsなので4となる。
+各スイッチからルートブリッジ(Switch3)までの経路のルートパスコストを計算し、値の小さい方がルートポートとなる。計算結果は以下の通り。
+Switch1
+F0/1 Switch1-Switch2-Switch4-Switch3：19+100+4=123
+F0/2 Switch1-Switch3：100
+F0/2がRP
+
+Switch2
+F0/1 Switch2-Switch1-Switch3：19+100=119
+F0/2 Switch2-Switch4-Switch3：100+4=104
+F0/2がRP
+
+Switch4
+E0/1 Switch4-Switch2-Switch1-Switch3：100+19+100=219
+E0/2 Switch4-Switch3：4
+E0/2がRP
+
+次に指定ポートを選出する。
+Switch3はルートブリッジなので、全てのポートがDPとなる。
+次にRPの対向ポートは必ず指定ポートになるので、
+Switch1 F0/1、Switch2 F0/1、Switch4 E0/1がDPとなる。
+しかし、指定ポートは各コリジョンドメインごとに一つなので、Switch1とSwitch2を比べ、ブリッジIDの小さいSwitch2がDPとなる。
+最後にどちらにも選出されなかったSwitch1 F0/1はBPとなる。
+
+
