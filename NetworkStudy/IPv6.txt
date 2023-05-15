@@ -1,4 +1,4 @@
-（１） A9:AA:AA:FF:FE:AA:AA:AA
+（１） A8:AA:AA:FF:FE:AA:AA:AA
 
 （２） 9A:76:54:FF:FE:32:10:FE
 
